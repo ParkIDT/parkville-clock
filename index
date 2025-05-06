@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parkville Clock</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .clock-container {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #clock {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    #date {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <div id="date"></div>
+    <div id="clock"></div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const options = {
+        timeZone: 'America/Chicago',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+      };
+      const dateOptions = {
+        timeZone: 'America/Chicago',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long'
+      };
+
+      const now = new Date();
+      const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+      const dateString = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+
+      document.getElementById('clock').textContent = timeString;
+      document.getElementById('date').textContent = dateString;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
